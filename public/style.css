@@ -1,0 +1,50 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  .vertical-nav {
+    width: 250px;
+    background-color: #777;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in width calculation */
+    height: 100vh; /* Full height of viewport */
+    position: fixed; /* Fixed position to stay visible while scrolling */
+    left: 0;
+    top: 0;
+  }
+  
+  .vertical-nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .vertical-nav li {
+    margin-bottom: 10px;
+  }
+  
+  .vertical-nav a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .vertical-nav a:hover {
+    background-color: #555;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 250px; /* Adjust based on sidebar width */
+  }
+  
