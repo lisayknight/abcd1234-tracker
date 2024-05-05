@@ -1,50 +1,67 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-  }
-  
-  .container {
-    display: flex;
-  }
-  
-  .vertical-nav {
-    width: 250px;
-    background-color: #777;
-    color: #fff;
-    padding: 20px;
-    box-sizing: border-box; /* Include padding in width calculation */
-    height: 100vh; /* Full height of viewport */
-    position: fixed; /* Fixed position to stay visible while scrolling */
-    left: 0;
-    top: 0;
-  }
-  
-  .vertical-nav ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .vertical-nav li {
-    margin-bottom: 10px;
-  }
-  
-  .vertical-nav a {
-    color: #fff;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .vertical-nav a:hover {
-    background-color: #555;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 20px;
-    margin-left: 250px; /* Adjust based on sidebar width */
-  }
-  
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+}
+
+.vertical-nav {
+  width: 250px;
+  background-color: #777;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box; /* Include padding in width calculation */
+  height: 100vh; /* Full height of viewport */
+  position: fixed; /* Fixed position to stay visible while scrolling */
+  left: 0;
+  top: 0;
+}
+
+.vertical-nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.vertical-nav li {
+  margin-bottom: 10px;
+  position: relative; /* Added for positioning sub-menu */
+}
+
+.vertical-nav a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.vertical-nav a:hover {
+  background-color: #555;
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff; /* Background color of sub-menu */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Box shadow for sub-menu */
+  top: 100%;
+  left: 0;
+  min-width: 200px; /* Adjust as needed */
+}
+
+.vertical-nav li:hover .sub-menu {
+  display: block;
+}
+
+.sub-menu li {
+  display: inline-block;
+  margin-right: 10px; /* Adjust spacing between sub-menu items */
+}
+
+.sub-menu li:first-child {
+  margin-left: 0; /* Remove left margin for the first child */
+}
