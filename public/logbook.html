@@ -15,7 +15,7 @@
   
   <div class="vertical-nav2">
     <ul>
-      <li id="library">Library</li>
+      <li id="library">Library</a></li>
       <li id="plus"><a href="logbook-form.html">+</a></li>
       <ul class="sub-menu">
         <li id="logbook"><a href="logbook.html">Logbook</a></li>
@@ -27,15 +27,42 @@
   </div>
   <div class="container">
     <div class="content-area">
-      <h1>Simmer n Sip</h1>
-      <p>This is the main content area.</p>
-      <img src="../images/max-griss-otLqpb9LK70-unsplash.jpg" alt="Thai Red Curry Soup" width="400">
+    <!-- Display submitted soup form data here -->
+      <h2>Submitted Soup Form Data</h2>
+      <ul id="submittedSoupData"></ul>
+
     </div>
   </div>
   <script src="script.js"></script>
   <script>
-    // Function to load recent items from Local Storage and populate the recent items list in the navigation bar
-    function loadRecentItemsNav() {
+    // Function to load and display submitted soup form data
+    function loadSubmittedSoupData() {
+      const logbookFormData = JSON.parse(localStorage.getItem("logbookFormData"));
+      const submittedSoupData = document.getElementById("submittedSoupData");
+      if (!submittedSoupData) {
+        console.error("Could not find the 'submittedSoupData' list.");
+        return;
+      }
+
+      submittedSoupData.innerHTML = ""; // Clear existing data
+
+      if (logbookFormData) {
+        // Create list items for each submitted soup
+        logbookFormData.forEach(soup => {
+          let listItem = document.createElement("li");
+          listItem.textContent = `Name: ${soup.soupName}, Cuisine: ${soup.cuisine}`;
+          submittedSoupData.appendChild(listItem);
+        });
+      } else {
+        // No submitted soup data found
+        let messageItem = document.createElement("li");
+        messageItem.textContent = "No submitted soup data.";
+        submittedSoupData.appendChild(messageItem);
+      }
+    }
+
+        // Function to load recent items from Local Storage and populate the recent items list in the navigation bar
+        function loadRecentItemsNav() {
       const recentItems = localStorage.getItem("recentItems") || "[]";
       const parsedItems = JSON.parse(recentItems);
       const recentItemsNav = document.getElementById("recentItemsNav");
@@ -72,6 +99,7 @@
 
     // Call the loadRecentItemsNav function on page load
     window.addEventListener("load", loadRecentItemsNav);
+
   </script>
 </body>
 </html>

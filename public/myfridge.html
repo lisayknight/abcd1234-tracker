@@ -15,7 +15,7 @@
   
   <div class="vertical-nav2">
     <ul>
-      <li id="library">Library</li>
+      <li id="library">Library</a></li>
       <li id="plus"><a href="logbook-form.html">+</a></li>
       <ul class="sub-menu">
         <li id="logbook"><a href="logbook.html">Logbook</a></li>
@@ -27,15 +27,19 @@
   </div>
   <div class="container">
     <div class="content-area">
-      <h1>Simmer n Sip</h1>
-      <p>This is the main content area.</p>
-      <img src="../images/max-griss-otLqpb9LK70-unsplash.jpg" alt="Thai Red Curry Soup" width="400">
+      <div class="fridge-headings">
+       <h2>Vegetables/Fruits</h2>
+       <h2>Legumes</h2>
+       <h2>Stocks/Spices</h2>
+       <h2>Proteins</h2>
+       <h2>Staple Carbs</h2>
+     </div>
     </div>
   </div>
   <script src="script.js"></script>
   <script>
-    // Function to load recent items from Local Storage and populate the recent items list in the navigation bar
-    function loadRecentItemsNav() {
+        // Function to load recent items from Local Storage and populate the recent items list in the navigation bar
+        function loadRecentItemsNav() {
       const recentItems = localStorage.getItem("recentItems") || "[]";
       const parsedItems = JSON.parse(recentItems);
       const recentItemsNav = document.getElementById("recentItemsNav");
