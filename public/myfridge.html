@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Website</title>
 <!-- Using a Content Delivery Network to install jquery -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -29,14 +29,20 @@
   </div>
   <div class="container">
     <div class="content-area">
-      <div class="fridge-headings">
-       <h2 id="VegetableFruit">Vegetable/Fruit</h2>
-       <h2 id="Legume">Legume</h2>
-       <h2 id="StockSpice">Stock/Spice</h2>
-       <h2 id="Protein">Protein</h2>
-       <h2 id="StapleCarb">Staple-Carb</h2>
-     </div>
+      <div class="parent-container-log">
+        <div class="empty-space"></div>
+          <h1 id="heading-log">MY FRIDGE</h1>
+          <div class="fridge-container">
+           <div class="fridge-headings">
+            <h2 id="VegetableFruit">Vegetable/Fruit</h2>
+            <h2 id="Legume">Legume</h2>
+            <h2 id="StockSpice">Stock/Spice</h2>
+            <h2 id="Protein">Protein</h2>
+            <h2 id="StapleCarb">Staple-Carb</h2>
+           </div>
+          </div>
      <!-- <div id="dataDisplay"></div> -->
+      </div>
     </div>
   </div>
   <script src="script.js"></script>

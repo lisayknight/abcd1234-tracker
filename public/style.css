@@ -289,19 +289,15 @@ margin-right: auto; /* Align text container to the right of the parent container
 
 /* Logbook Content Styles */
 
-/* Accomodaion page content */
-
 .parent-container-log {
   width: 80%; /* Set the width of the container to 80% of the page */
   margin: 0 auto; /* Center the container horizontally on the page */
   padding: 20px 0px; /* Add space at the top and bottom of the container */
 }
 
-
 #heading-log {
   text-align: center;
 }
-
 
 .log-container {
   background-color: rgba(255, 255, 255, 0.4); /* Use rgba format to set opacity to 30% */
@@ -309,7 +305,6 @@ margin-right: auto; /* Align text container to the right of the parent container
   display: flex;
   justify-content: space-between; /* Add space between children elements */
   text-align: left;
-  align-items: stretch; /* Align children elements to stretch vertically */
   margin: 0 auto; /* Center the container horizontally */
   max-width: 1200px; /* Container's max-width is 1200px*/
   margin-top: 5px; /* Add space at the top of the container */
@@ -317,62 +312,41 @@ margin-right: auto; /* Align text container to the right of the parent container
   height: 500px;
 }
 
-
-.log-section {
-  text-align: left;
-  display: flex; /* Enable flexbox layout for the section */
-  flex-direction: column; /* Stack content vertically within the section */
-  text-align: left;
-  margin: 0 auto;
-  padding: 20px;
-  flex: 1; /* Distribute available space evenly among sections */
-  border-radius: 10px; /* Rounded corners for each section */
-  position: relative; /* Add this to position the line within the section */
-}
-
-.log-section img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-}
-
-
-.log-section:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 50%; /* Vertically centered */
-  transform: translateY(-50%); /* Vertically centered */
-  width: 1.5px;
-  height: 90%; /* Takes up 90% of the section's height */
-  background-color: white;
-}
-
-
-.log-section img {
-  max-width: 100%; /* Set the maximum width to 100% of the container width */
-  max-height: 100%; /* Set the maximum height to 100% of the container height */
-  width: auto; /* Allow the width to adjust proportionally */
-  height: auto; /* Allow the height to adjust proportionally */
-}
-
-
-.text-container-log1 {
-  margin-top: 25px;
-  margin-bottom: 10px;
-}
-
-
-.text-container-log2 {
-  margin-top: 10px;
+.soups {
+  margin-top: 20px;
   margin-bottom: 5px;
+  padding-left: 30px;
+  text-align: left;
+  line-height: 1;
+  max-width: 300px; /* Adjust the width value as needed */
+  margin-right: auto; /* Align text container to the right of the parent container*/
+
+}
+
+/* My Fridge Content Styles */
+
+.fridge-container {
+  background-color: rgba(255, 255, 255, 0.4); /* Use rgba format to set opacity to 30% */
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between; /* Add space between children elements */
+  text-align: left;
+  margin: 0 auto; /* Center the container horizontally */
+  max-width: 1200px; /* Container's max-width is 1200px*/
+  margin-top: 5px; /* Add space at the top of the container */
+  margin-bottom: 10px;
+  height: 700px;
+}
+
+.fridge-headings {
+margin-top: 20px;
+margin-bottom: 5px;
+padding-left: 30px;
+text-align: left;
+line-height: 1;
+max-width: 300px; /* Adjust the width value as needed */
+margin-right: auto; /* Align text container to the right of the parent container*/
 }
 
 
-.text-container-log3 {
-  margin-top: 45px;
-}
-.text-container-log4 {
-  margin-top: 40px;
-}
+

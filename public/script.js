@@ -40,38 +40,88 @@ function handleFormDisplay(selectedValue) {
   console.log("Soup Form Display:", $soupForm.css("display"));
 }
 
-// Function to handle form submission for soup
-function handleSoupFormSubmission(event) {
-  event.preventDefault();
-  const soupData = {
-    uuid: generateUUID(),
-    soupNameInput: $("#soupNameInput").val(),
-    cuisineInput: $("#cuisineInput").val(),
-    prepTimeInput: $("#prepTimeInput").val(),
-    ingredientsInput: $("#ingredientsInput").val(),
-    caloriesInput: $("#caloriesInput").val(),
-    dateInput: $("#dateInput").val(),
-    notesInput: $("#notesInput").val()
-  };
+  // Define loadSubmittedSoupData as a global function
+function loadSubmittedSoupData() {
+  // Retrieve the soup data from local storage
+  let soupData = JSON.parse(localStorage.getItem('soupData')) || [];
 
-  console.log("Soup added:", soupData);
-  addToRecent("Soup", soupData.uuid, soupData.soupNameInput, `${soupData.cuisineInput}, ${soupData.prepTimeInput} mins`, soupData.dateInput, soupData);
-  saveToLocalStorage("Soup", soupData);
+  // Get the element where you want to display the soup data
+  const soupList = document.getElementById('soupList');
+  console.log(soupList);
 
-  // Submit form to logbook.html
-  $('<form>', {
-    "id": "soupFormSubmit",
-    "html": $('<input>', {
-      "type": "hidden",
-      "name": "soupData",
-      "value": JSON.stringify(soupData)
-    }),
-    "action": "logbook.html"
-  }).appendTo(document.body).submit();
+  // Add each soup to the soup list
+  soupData.forEach((soup, index) => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${soup.name}: ${soup.ingredients}, ${soup.cuisine}, ${soup.prepTime}, ${soup.calories}, ${soup.date}, ${soup.notes}`;
+
+    // Create the delete button
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', () => {
+      // Remove the soup from the soupData array
+      soupData.splice(index, 1);
+
+      // Update local storage
+      localStorage.setItem('soupData', JSON.stringify(soupData));
+
+      // Update the displayed soup list
+      loadSubmittedSoupData();
+    });
+
+    // Add the delete button to the list item
+    listItem.appendChild(deleteButton);
+
+    // Add the list item to the soup list
+    soupList.appendChild(listItem);
+  });
 }
 
-// Event listener for soup form submission
-$("#soupFormDetails").on("submit", handleSoupFormSubmission);
+window.onload = (function() {
+  // Event listener for soup form submission
+  $("#soupFormDetails").on("submit", function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+
+    // Gather the data from your form inputs
+    const soupName = $('#soupNameInput').val();
+    const soupIngredients = $('#ingredientsInput').val();
+    const soupCuisine = $('#cuisineInput').val();
+    const soupPrepTime = $('#prepTimeInput').val();
+    const soupCalories = $('#caloriesInput').val();
+    const soupDate = $('#dateInput').val();
+    const soupNotes = $('#notesInput').val();
+
+    // Create a soup object with this data
+    const soupData = { 
+      name: soupName, 
+      ingredients: soupIngredients,
+      cuisine: soupCuisine,
+      prepTime: soupPrepTime,
+      calories: soupCalories,
+      date: soupDate,
+      notes: soupNotes
+    };
+
+    // Retrieve the current soup data array from local storage
+    const soupDataArray = JSON.parse(localStorage.getItem('soupData')) || [];
+
+    // Add the new soup data to the array
+    soupDataArray.push(soupData);
+
+    // Save the updated array back to local storage
+    localStorage.setItem('soupData', JSON.stringify(soupDataArray));
+
+    // Redirect to logbook.html
+    window.location.href = "logbook.html";
+  });
+
+   // Call the loadRecentItemsNav function on page load
+   loadRecentItemsNav();
+  }); 
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Call the loadSubmittedSoupData function on page load
+   loadSubmittedSoupData();
+   });
 
 // Function to handle fridge form submission
 $("#fridgeFormDetails").on("submit", function(event) {
@@ -85,7 +135,7 @@ $("#fridgeFormDetails").on("submit", function(event) {
   };
 
   console.log("Fridge item added:", fridgeData);
-  addToRecent("Fridge", fridgeData.ingredientName, `${fridgeData.quantity} ${fridgeData.unit}`, `${fridgeData.calories} calories`);
+  addToRecent("Fridge", fridgeData.ingredientName, `${fridgeData.quantity} ${fridgeData.unit}`, `${fridgeData.calories}`);
 
   // a try-catch block to handle any errors that occur when parsing the JSON:
   function saveToLocalStorage(key, newItem) {
@@ -187,9 +237,8 @@ $(window).on("load", () => {
 });
 
 //Ensures fridgeItems is an array of objects representing the items in the fridge
-
-    //Ensures fridgeItems is an array of objects representing the items in the fridge
 $(document).ready(function() {
+  //Ensures fridgeItems is an array of objects representing the items in the fridge
   let fridgeItems = JSON.parse(localStorage.getItem("fridgeForm"));
 
   if (fridgeItems === null) {
@@ -229,6 +278,18 @@ function deleteFridgeItem(name) {
   location.reload(); // reload the page to reflect the changes in the local storage
 }
 
+$(document).ready(function() {
+  // Retrieve the soup data from local storage
+  const soupData = JSON.parse(localStorage.getItem('soupData'));
+
+  // Check if soupData exists
+  if (soupData) {
+    // Create a list item for each property in the soupData object
+    for (let property in soupData) {
+      $('#soupDataList').append(`<li>${property}: ${soupData[property]}</li>`);
+    }
+  }
+});
 
 // Function to delete an item from the recent list and Local Storage
 function deleteItem(id) {
