@@ -54,29 +54,39 @@ function loadSubmittedSoupData() {
     const listItem = document.createElement('li');
     listItem.textContent = `${soup.name}: ${soup.ingredients}, ${soup.cuisine}, ${soup.prepTime}, ${soup.calories}, ${soup.date}, ${soup.notes}`;
 
-    // Create the delete button
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.addEventListener('click', () => {
-      // Remove the soup from the soupData array
-      soupData.splice(index, 1);
+// Iterate over the array in reverse
+for (let i = soupData.length - 1; i >= 0; i--) {
+  const soup = soupData[i];
+  const listItem = document.createElement('li');
+  listItem.textContent = `${soup.name}: ${soup.ingredients}, ${soup.cuisine}, ${soup.prepTime}, ${soup.calories}, ${soup.date}, ${soup.notes}`;
 
-      // Update local storage
-      localStorage.setItem('soupData', JSON.stringify(soupData));
+  // Create the delete button
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Delete';
+  deleteButton.addEventListener('click', () => {
+    // Remove the soup from the soupData array
+    soupData.splice(i, 1);
 
-      // Update the displayed soup list
-      loadSubmittedSoupData();
-    });
+    // Update local storage
+    localStorage.setItem('soupData', JSON.stringify(soupData));
 
-    // Add the delete button to the list item
-    listItem.appendChild(deleteButton);
+    // Clear the soup list
+    soupList.innerHTML = '';
 
-    // Add the list item to the soup list
-    soupList.appendChild(listItem);
+    // Update the displayed soup list
+    loadSubmittedSoupData();
+  });
+
+  // Add the delete button to the list item
+  listItem.appendChild(deleteButton);
+
+  // Add the list item to the soup list
+  soupList.appendChild(listItem);
+  }
   });
 }
 
-window.onload = (function() {
+$(document).ready(function() {
   // Event listener for soup form submission
   $("#soupFormDetails").on("submit", function(event) {
     event.preventDefault(); // Prevent the form from submitting normally
