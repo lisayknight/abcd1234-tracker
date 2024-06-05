@@ -1,5 +1,8 @@
-// Setting up variables for our HTML elements using DOM selection
-const taskTypeDropdown = document.getElementById("taskType");
+// Setting up variables for our HTML elements using jQuery
+const $taskTypeDropdown = $("#taskType");
+const $soupForm = $("#soupForm");
+const $fridgeForm = $("#fridgeForm");
+const $recentList = $("#recentItemsNav");
 
 // Function to generate a UUID
 function generateUUID() {
@@ -9,131 +12,115 @@ function generateUUID() {
 }
 
 // Event listener for dropdown menu change
-taskTypeDropdown.addEventListener("change", function(event) {
-  const selectedValue = event.target.value;
+$taskTypeDropdown.on("change", function(event) {
+  const selectedValue = $(this).val();
   console.log("Selected task type:", selectedValue);
   handleFormDisplay(selectedValue);
 });
 
 function handleFormDisplay(selectedValue) {
-  const soupForm = document.getElementById("soupForm");
-  const fridgeForm = document.getElementById("fridgeForm");
+  const $soupForm = $("#soupForm");
+  const $fridgeForm = $("#fridgeForm");
 
   if (selectedValue === "select") {
-    soupForm.style.display = "none";
-    fridgeForm.style.display = "none";
+    $soupForm.hide();
+    $fridgeForm.hide();
   } else if (selectedValue === "fridge") {
-    soupForm.style.display = "none";
-    fridgeForm.style.display = "block";
+    $soupForm.hide();
+    $fridgeForm.show();
   } else if (selectedValue === "logbook") {
-    soupForm.style.display = "block";
-    fridgeForm.style.display = "none";
+    $soupForm.show();
+    $fridgeForm.hide();
   } else {
     // Handle unexpected selections (optional)
     console.warn("Unexpected task type selected:", selectedValue);
   }
 
-  console.log("Fridge Form Display:", fridgeForm.style.display);
-  console.log("Soup Form Display:", soupForm.style.display);
+  console.log("Fridge Form Display:", $fridgeForm.css("display"));
+  console.log("Soup Form Display:", $soupForm.css("display"));
 }
 
 // Function to handle form submission for soup
 function handleSoupFormSubmission(event) {
   event.preventDefault();
-  let soupNameInput = document.getElementById("soupNameInput").value;
-  let cuisineInput = document.getElementById("cuisineInput").value;
-  let uuid = generateUUID(); // Generate a unique ID for the soup
-  let prepTimeInput = document.getElementById("prepTimeInput").value;
-  let ingredientsInput = document.getElementById("ingredientsInput").value;
-  let caloriesInput = document.getElementById("caloriesInput").value;
-  let dateInput = document.getElementById("dateInput").value;
-  let notesInput = document.getElementById("notesInput").value;
+  const soupData = {
+    uuid: generateUUID(),
+    soupNameInput: $("#soupNameInput").val(),
+    cuisineInput: $("#cuisineInput").val(),
+    prepTimeInput: $("#prepTimeInput").val(),
+    ingredientsInput: $("#ingredientsInput").val(),
+    caloriesInput: $("#caloriesInput").val(),
+    dateInput: $("#dateInput").val(),
+    notesInput: $("#notesInput").val()
+  };
 
-  console.log("Soup added:", { uuid, soupNameInput, cuisineInput, prepTimeInput, ingredientsInput, caloriesInput, dateInput, notesInput });
-  addToRecent("Soup", uuid, soupNameInput, `${cuisineInput}, ${prepTimeInput} mins`, dateInput, { prepTimeInput, ingredientsInput, caloriesInput, dateInput, notesInput });
-  saveToLocalStorage("Soup", { uuid, soupNameInput, cuisineInput, prepTimeInput, ingredientsInput, caloriesInput, dateInput, notesInput });
+  console.log("Soup added:", soupData);
+  addToRecent("Soup", soupData.uuid, soupData.soupNameInput, `${soupData.cuisineInput}, ${soupData.prepTimeInput} mins`, soupData.dateInput, soupData);
+  saveToLocalStorage("Soup", soupData);
+
+  // Submit form to logbook.html
+  $('<form>', {
+    "id": "soupFormSubmit",
+    "html": $('<input>', {
+      "type": "hidden",
+      "name": "soupData",
+      "value": JSON.stringify(soupData)
+    }),
+    "action": "logbook.html"
+  }).appendTo(document.body).submit();
 }
 
 // Event listener for soup form submission
-document.getElementById("soupFormDetails").addEventListener("submit", handleSoupFormSubmission);
-
-// Inside addToRecent function
-function addToRecent(type, id, name, detail, date, extraData) {
-  console.log(`Adding to recent: ${type}, ${name}, ${detail}`);
-  const recentList = document.getElementById("recentItemsNav");
-  if (!recentList) {
-    console.error("Could not find the 'recentItemsNav' list.");
-    return;
-  }
-
-  let item = document.createElement("li");
-  item.setAttribute("data-id", id);
-  item.innerHTML = `${type}: ${name} (${detail}) <button onclick="deleteItem('${id}')">Delete</button>`; // Add delete button
-  recentList.appendChild(item);
-
-  saveRecentItemToLocalStorage({ id, type, name, detail, date, extraData }); // Save to localStorage
-}
+$("#soupFormDetails").on("submit", handleSoupFormSubmission);
 
 // Function to handle fridge form submission
-document.getElementById("fridgeFormDetails").addEventListener("submit", function(event) {
+$("#fridgeFormDetails").on("submit", function(event) {
   event.preventDefault();
-  let ingredientName = document.getElementById("ingredientName").value;
-  let foodGroup = document.getElementById("foodGroup").value;
-  let quantity = document.getElementById("quantity").value;
-  let unit = document.getElementById("unit").value;
-  let calories = document.getElementById("calories").value;
-  let protein = document.getElementById("protein").value;
-  let fat = document.getElementById("fat").value;
-  let carbohydrates = document.getElementById("carbohydrates").value;
-  let fibre = document.getElementById("fibre").value;
-  let sugar = document.getElementById("sugar").value;
-  addFridgeItem(ingredientName, foodGroup, quantity, unit, calories, protein, fat, carbohydrates, fibre, sugar);
-  addToRecent("Fridge", ingredientName, `${quantity} ${unit}`, `${calories} calories, ${protein} protein, ${fat} fat, ${carbohydrates} carbohydrates, ${fibre} fibre, ${sugar} sugar`);
-  saveToLocalStorage("Fridge", {
-    ingredientName,
-    foodGroup,
-    quantity,
-    unit,
-    calories,
-    protein,
-    fat,
-    carbohydrates,
-    fibre,
-    sugar
-  });
-});
-
-function addFridgeItem(ingredientName, foodGroup, quantity, unit, calories, protein, fat, carbohydrates, fibre, sugar) {
-  let fridgeItem = {
-    ingredientName,
-    foodGroup,
-    quantity,
-    unit,
-    calories,
-    protein,
-    fat,
-    carbohydrates,
-    fibre,
-    sugar
+  const fridgeData = {
+    ingredientName: $("#ingredientName").val(),
+    foodGroup: $("#foodGroup").val(),
+    quantity: $("#quantity").val(),
+    unit: $("#unit").val(),
+    calories: $("#calories").val()
   };
-  console.log("Fridge item added:", fridgeItem);
-  // Add additional code to handle adding the fridge item to your data structure or UI
-}
+
+  console.log("Fridge item added:", fridgeData);
+  addToRecent("Fridge", fridgeData.ingredientName, `${fridgeData.quantity} ${fridgeData.unit}`, `${fridgeData.calories} calories`);
+
+  // a try-catch block to handle any errors that occur when parsing the JSON:
+  function saveToLocalStorage(key, newItem) {
+    let items;
+    try {
+      items = JSON.parse(localStorage.getItem(key));
+      if (!Array.isArray(items)) {
+        items = [];
+      }
+    } catch (error) {
+      console.error(`Error parsing items from local storage: ${error}`);
+      items = [];
+    }
+    items.push(newItem);
+    localStorage.setItem(key, JSON.stringify(items));
+  }
+
+  saveToLocalStorage("fridgeForm", fridgeData);
+
+  // Submit form to myfridge.html with form data as a URL parameter
+  window.location.href = `myfridge.html?fridgeData=${encodeURIComponent(JSON.stringify(fridgeData))}`;
+});
 
 function addToRecent(type, id, name, detail) {
   console.log(`Adding to recent: ${type}, ${name}, ${detail}`);
-  const recentList = document.getElementById("recentItemsNav");
-  if (!recentList) {
+  const $recentList = $("#recentItemsNav");
+  if (!$recentList.length) {
     console.error("Could not find the 'recentItemsNav' list.");
     return;
   }
 
-  let item = document.createElement("li");
-  item.setAttribute("data-id", id);
-  item.innerHTML = `${type}: ${name} (${detail}) <button onclick="deleteItem('${id}')">Delete</button>`; // Add delete button
-  recentList.appendChild(item);
+  const $item = $("<li>").attr("data-id", id).html(`${type}: ${name} (${detail}) <button onclick="deleteItem('${id}')">Delete</button>`);
+  $recentList.append($item);
 
-  saveRecentItemToLocalStorage({ id, type, name, detail }); // Save to localStorage
+  saveRecentItemToLocalStorage({ id, type, name, detail });
 }
 
 function saveRecentItemToLocalStorage(item) {
@@ -157,60 +144,102 @@ function saveToLocalStorage(type, data) {
 
 function loadFromLocalStorage() {
   const soupForm = JSON.parse(localStorage.getItem("soupForm"));
-
   if (soupForm) {
-    document.getElementById("soupNameInput").value = soupForm.soupNameInput;
-    document.getElementById("cuisineInput").value = soupForm.cuisineInput;
-    // Add other input field assignments here if needed
+    $("#soupNameInput").val(soupForm.soupNameInput);
+    $("#cuisineInput").val(soupForm.cuisineInput);
+    $("#prepTimeInput").val(soupForm.prepTimeInput);
+    $("#ingredientsInput").val(soupForm.ingredientsInput);
+    $("#caloriesInput").val(soupForm.caloriesInput);
+    $("#dateInput").val(soupForm.dateInput);
+    $("#notesInput").val(soupForm.notesInput);
   }
+
+  const fridgeForm = JSON.parse(localStorage.getItem("fridgeForm"));
   if (fridgeForm) {
-    document.getElementById("ingredientName").value = fridgeForm.ingredientName;
-    document.getElementById("foodGroup").value = fridgeForm.foodGroup;
-    document.getElementById("quantity").value = fridgeForm.quantity;
-    document.getElementById("unit").value = fridgeForm.unit;
-    document.getElementById("calories").value = fridgeForm.calories;
-    document.getElementById("protein").value = fridgeForm.protein;
-    document.getElementById("fat").value = fridgeForm.fat;
-    document.getElementById("carbohydrates").value = fridgeForm.carbohydrates;
-    document.getElementById("fibre").value = fridgeForm.fibre;
-    document.getElementById("sugar").value = fridgeForm.sugar;
+    $("#ingredientName").val(fridgeForm.ingredientName);
+    $("#foodGroup").val(fridgeForm.foodGroup);
+    $("#quantity").val(fridgeForm.quantity);
+    $("#unit").val(fridgeForm.unit);
+    $("#calories").val(fridgeForm.calories);
   }
 }
 
 function loadRecentItemsNav() {
   const recentItems = JSON.parse(localStorage.getItem("recentItems")) || [];
-  const recentItemsNav = document.getElementById("recentItemsNav");
-  if (!recentItemsNav) {
+  const $recentItemsNav = $("#recentItemsNav");
+  if (!$recentItemsNav.length) {
     console.error("Could not find the 'recentItemsNav' list.");
     return;
   }
 
-  recentItemsNav.innerHTML = ""; // Clear existing items
+  $recentItemsNav.empty(); // Clear existing items
 
-  for (const item of recentItems) {
-    let listItem = document.createElement("li");
-    listItem.setAttribute("data-id", item.id);
-    listItem.innerHTML = `${item.type}: ${item.name} (${item.detail}) <button onclick="deleteItem('${item.id}')">Delete</button>`; // Add delete button
-    recentItemsNav.appendChild(listItem);
-  }
+  recentItems.forEach(item => {
+    const $listItem = $("<li>").attr("data-id", item.id).html(`${item.type}: ${item.name} (${item.detail}) <button onclick="deleteItem('${item.id}')">Delete</button>`);
+    $recentItemsNav.append($listItem);
+  });
 }
 
 // Call the load functions on page load
-window.addEventListener("load", () => {
+$(window).on("load", () => {
   loadFromLocalStorage();
   loadRecentItemsNav();
 });
 
+//Ensures fridgeItems is an array of objects representing the items in the fridge
+
+    //Ensures fridgeItems is an array of objects representing the items in the fridge
+$(document).ready(function() {
+  let fridgeItems = JSON.parse(localStorage.getItem("fridgeForm"));
+
+  if (fridgeItems === null) {
+    fridgeItems = [];
+  } else if (!Array.isArray(fridgeItems)) {
+    fridgeItems = [fridgeItems];
+  }
+
+  fridgeItems.forEach((item, index) => {
+    console.log('foodGroup:', item.foodGroup);
+    const foodGroupElement = document.getElementById(item.foodGroup);
+    console.log('foodGroupElement:', foodGroupElement);
+    if (foodGroupElement) {
+      const itemElement = document.createElement("p");
+      itemElement.textContent = `${item.ingredientName}: ${item.quantity} ${item.unit}, ${item.calories} calories`;
+      
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.addEventListener("click", function() {
+      container.remove(); // remove the container
+      deleteFridgeItem(item.ingredientName); // pass the name of the item to deleteFridgeItem
+    });
+
+      const container = document.createElement("div");
+      container.appendChild(itemElement);
+      container.appendChild(deleteButton);
+
+      foodGroupElement.parentNode.insertBefore(container, foodGroupElement.nextSibling);
+    }
+  });
+});
+
+function deleteFridgeItem(name) {
+  let fridgeItems = JSON.parse(localStorage.getItem("fridgeForm"));
+  fridgeItems = fridgeItems.filter(item => item.ingredientName !== name); // delete the item with the given name
+  localStorage.setItem("fridgeForm", JSON.stringify(fridgeItems));
+  location.reload(); // reload the page to reflect the changes in the local storage
+}
+
+
 // Function to delete an item from the recent list and Local Storage
 function deleteItem(id) {
-  const recentList = document.getElementById("recentItemsNav");
-  const item = recentList.querySelector(`li[data-id="${id}"]`);
-  if (item) {
-    recentList.removeChild(item);
+  const $recentList = $("#recentItemsNav");
+  const $item = $recentList.find(`li[data-id="${id}"]`);
+  if ($item.length) {
+    $item.remove();
 
     // Remove the item from Local Storage
     const recentItems = JSON.parse(localStorage.getItem("recentItems")) || [];
     const updatedItems = recentItems.filter(i => i.id !== id);
     localStorage.setItem("recentItems", JSON.stringify(updatedItems));
   }
-}
+};

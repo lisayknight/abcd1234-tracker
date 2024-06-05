@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Website</title>
+<!-- Using a Content Delivery Network to install jquery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,13 +27,84 @@
       <ul id="recentItemsNav" class="recent-items-nav"></ul>
     </ul>
   </div>
-  <div class="container">
-    <div class="content-area">
-      <h1>Simmer n Sip</h1>
-      <p>This is the main content area.</p>
-      <img src="../images/max-griss-otLqpb9LK70-unsplash.jpg" alt="Thai Red Curry Soup" width="400">
-    </div>
+
+<div class="container">
+  <div class="content-area">
+  <div class="parent-container-dash">
+    <div class="empty-space"></div>
+    <h1 id="app-heading">SIMMER N SIP</h1>
+    <div class="empty-space"></div>
+
+    <!-- Top Section -->
+        <div class="dashboard-container1">
+
+
+          <div class="dashboard-section1">
+            <div class="text-container-dash1">
+             <h2 id="weekly-heading">WEEKLY SUMMARY</h2>
+            </div>
+            <div class="text-container-dash2">
+             <h3>Soup of the Week</h3>
+             <h5>Thai Red Curry Noodle Soup</h5>
+            </div>
+
+              <img id="dash-img" src="../images/max-griss-otLqpb9LK70-unsplash.jpg" alt="Thai Red Curry Soup" width="400">
+
+            <div class="spanned-text">
+              <div class="span-item">
+                <h5>TOTAL CALORIES:</h5>
+                <h5>1802</h5>
+              </div>
+              <div class="span-item">
+                <h5>TOTAL PREP TIME:</h5>
+                <h5>70mins</h5>
+              </div>
+              <div class="span-item">
+                <h5>NUMBER OF SOUPS MADE:</h5>
+                <h5>5</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+           
+        <!-- End of Top Section -->
+         <!-- Right Section -->
+         <h2 id="notes-heading">NOTES</h2>
+         <div class="dashboard-container2">
+            <div class="dash-section2">
+              <div class="text-container-dash3">
+              <h5>Triple Pumpkin Soup</h5>
+              <h5>★★★★★</h5>
+              <p>Super easy to prepare, simple staple meal.</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="dashboard-container2">
+            <div class="dash-section2">
+              <div class="text-container-dash3">
+              <h5>Minestrone Soup</h5>
+              <h4>★★★</h4>
+              <p>Bit bland, may need to adjust stock base.</p> 
+              </div>
+            </div>
+        </div>
+
+        <div class="dashboard-container2">
+            <div class="dash-section2">
+              <div class="text-container-dash3">
+              <h5>Dashi Miso Broth</h5>
+              <h4>★★★★★</h4>
+              <p>Delicious and quick.</p>      
+              </div>
+            </div>
+        </div>
+
+        <!-- End of right section -->
   </div>
+ </div>
+</div>
+
   <script src="script.js"></script>
   <script>
     // Function to load recent items from Local Storage and populate the recent items list in the navigation bar

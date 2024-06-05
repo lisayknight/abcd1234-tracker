@@ -1,37 +1,64 @@
 body, html {
   margin: 0;
   padding: 0;
+  height: 100vh;
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: black;
 }
 
-.container {
-  display: flex;
-}
+/* Vertical Navigation Bar Styles */
 
-.vertical-nav {
-  width: 250px;
-  background-color: #777;
+.vertical-nav1 {
+  width: 350px;
+  background-color: #1c1e21;
   color: #fff;
-  padding: 20px;
-  box-sizing: border-box; /* Include padding in width calculation */
-  height: 100vh; /* Full height of viewport */
-  position: fixed; /* Fixed position to stay visible while scrolling */
-  left: 0;
-  top: 0;
+  padding: 1px;
+  box-sizing: border-box;
+  height: 8vh;
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  border-radius: 10px;
 }
 
-.vertical-nav ul {
+.vertical-nav1 ul {
   list-style-type: none;
-  padding: 0;
 }
 
-.vertical-nav li {
+.vertical-nav1 a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  display: block;
+  padding: 10px; 
+  border-radius: 10px;
+  margin-left: -25px;
+}
+
+.vertical-nav2 {
+  width: 350px;
+  background-color: #1c1e21;
+  color: #fff;
+  padding: 1px;
+  box-sizing: border-box;
+  height: 89vh;
+  position: fixed;
+  left: 10px;
+  top: 85px;
+  border-radius: 10px;
+}
+
+.vertical-nav2 ul {
+  list-style-type: none;
+  padding: 10px 25px;
+  margin-top: 10px;
+}
+
+.vertical-nav2 li {
   margin-bottom: 10px;
-  position: relative; /* Added for positioning sub-menu */
 }
 
-.vertical-nav a {
+.vertical-nav2 a {
   color: #fff;
   text-decoration: none;
   display: block;
@@ -39,29 +66,313 @@ body, html {
   border-radius: 5px;
 }
 
-.vertical-nav a:hover {
-  background-color: #555;
+.sub-menu li {
+  margin-right: 10px;
+}
+
+#plus {
+  content: "+";
+  display: inline-block;
+  margin-left: 270px; /* Adjust the margin-left as needed */
+  margin-top: -65px; /* Move the plus symbol above the sub-menu */
+  vertical-align: middle; /* Align vertically with the text */
+  font-size: 25px;
+  color: white;
+}
+
+.vertical-nav1 a:hover, 
+.vertical-nav2 a:hover:not(#library) {
+  font-weight: bold;
+}
+
+.vertical-nav1 a:active,
+.vertical-nav2 a:active:not(#library) {
+  font-weight: bold;
+}
+
+#library a {
+  font-weight: normal; /* Ensure library tab doesn't bolden */
+}
+
+#plus:hover, #plus:active {
+  font-weight: bold; /* Bolden plus symbol on hover and click */
 }
 
 .sub-menu {
-  display: none;
-  position: absolute;
-  background-color: #fff; /* Background color of sub-menu */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Box shadow for sub-menu */
-  top: 100%;
-  left: 0;
-  min-width: 200px; /* Adjust as needed */
-}
-
-.vertical-nav li:hover .sub-menu {
   display: block;
+  position: absolute;
+  top: 40px; /* Adjust this value to move the submenu up */
+  left: 0;
+  background-color: #1c1e21;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 5px;
+  z-index: 1; /* Ensure submenu appears above other content */
 }
 
 .sub-menu li {
-  display: inline-block;
-  margin-right: 10px; /* Adjust spacing between sub-menu items */
+  display: block;
+  margin-right: 10px;
 }
 
-.sub-menu li:first-child {
-  margin-left: 0; /* Remove left margin for the first child */
+
+#logbook,
+#myfridge {
+  background-color: #333842;
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 12px;
+  margin-bottom: 5px;
+  display: inline-block; /* Display the tabs inline */
+}
+
+#recent {
+  margin-top: 50px; /* Adjust margin-top to align with sub-menu */
+  margin-left: -2px; /* Adjust margin-left if needed */
+}
+
+/* Right Side Screen Styles */
+
+.container {
+  margin-left: 400px;
+  padding: 20px;
+  display: flex;
+}
+
+.content-area {
+  flex: 1;
+  background-color: #1c1e21;
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 1015px;
+  height: 93vh;
+  position: fixed;
+  left: 370px;
+  top: 10px;
+  overflow-y: auto;
+}
+
+.fridge-headings {
+  font-size: 12px;
+}
+
+/* Dashboard content styles */
+body.deals-page {
+min-height: 100vh;
+margin: 0;
+padding: 0;
+padding-bottom: 20px;
+background-color: #2C444F;
+}
+
+
+.parent-container-dash {
+width: 100%;
+margin: 0 auto;
+padding: 20px 0;
+}
+
+
+#app-heading {
+text-align: center;
+}
+
+
+#weekly-heading {
+color:  rgb(54, 54, 54);
+}
+
+
+.dashboard-container1 {
+background-color: rgba(255, 255, 255, 0.4);
+border-radius: 20px;
+padding: 20px;
+display: flex;
+flex-direction: column;
+align-items: stretch;
+margin: 0 auto;
+margin-top: 5px;
+margin-bottom: 20px;
+}
+
+
+.dashboard-section1 {
+padding: 20px;
+border-radius: 10px;
+position: relative;
+flex-grow: 1; /* Allow content to take up the available height */
+}
+
+
+#dash-img {
+max-width: 50%;
+max-height: 30%;
+width: auto;
+height: auto;
+right: -30px;
+}
+
+
+.text-container-dash1 {
+margin-bottom: 10px;
+text-align: left;
+}
+
+
+.text-container-dash2 {
+margin:0;
+text-align: left;
+line-height: 0.5;
+}
+
+
+.empty-space {
+display: flex; /* Create a flex container */
+justify-content: space-between; /* Space items evenly along the horizontal axis */
+}
+
+
+.spanned-text {
+display: flex;
+}
+
+
+.span-item {
+flex: 1;
+padding: 5px;
+text-align: center;
+margin-top: 10px;
+line-height: 0.5;
+}
+
+.dashboard-container2 {
+background-color: rgba(255, 255, 255, 0.4);
+border-radius: 20px;
+padding: 20px;
+display: flex;
+flex-direction: column; /* Set to column layout */
+align-items: stretch;
+width: 32.5%; /* Adjust the width as needed */
+height: 150px;
+margin: 0 0 20px auto;
+position: relative;
+top: -820px; /* Adjust the value for upward shift */
+right: 60px;
+}
+
+
+#notes-heading {
+text-align: center;
+margin-left: 240px; /* Adjust the value for left shift */
+position: relative;
+top: -820px; /* Adjust the value for upward shift */
+font-size: 20px;
+}
+
+
+.dash-section2 {
+display: flex;
+align-items: center;
+}
+
+
+.text-container-dash3 {
+margin-top: 5px;
+margin-bottom: 5px;
+padding-left: 10px;
+text-align: left;
+line-height: 1;
+max-width: 300px; /* Adjust the width value as needed */
+margin-right: auto; /* Align text container to the right of the parent container*/
+}
+
+/* Logbook Content Styles */
+
+/* Accomodaion page content */
+
+.parent-container-log {
+  width: 80%; /* Set the width of the container to 80% of the page */
+  margin: 0 auto; /* Center the container horizontally on the page */
+  padding: 20px 0px; /* Add space at the top and bottom of the container */
+}
+
+
+#heading-log {
+  text-align: center;
+}
+
+
+.log-container {
+  background-color: rgba(255, 255, 255, 0.4); /* Use rgba format to set opacity to 30% */
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between; /* Add space between children elements */
+  text-align: left;
+  align-items: stretch; /* Align children elements to stretch vertically */
+  margin: 0 auto; /* Center the container horizontally */
+  max-width: 1200px; /* Container's max-width is 1200px*/
+  margin-top: 5px; /* Add space at the top of the container */
+  margin-bottom: 10px;
+  height: 500px;
+}
+
+
+.log-section {
+  text-align: left;
+  display: flex; /* Enable flexbox layout for the section */
+  flex-direction: column; /* Stack content vertically within the section */
+  text-align: left;
+  margin: 0 auto;
+  padding: 20px;
+  flex: 1; /* Distribute available space evenly among sections */
+  border-radius: 10px; /* Rounded corners for each section */
+  position: relative; /* Add this to position the line within the section */
+}
+
+.log-section img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+
+.log-section:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%; /* Vertically centered */
+  transform: translateY(-50%); /* Vertically centered */
+  width: 1.5px;
+  height: 90%; /* Takes up 90% of the section's height */
+  background-color: white;
+}
+
+
+.log-section img {
+  max-width: 100%; /* Set the maximum width to 100% of the container width */
+  max-height: 100%; /* Set the maximum height to 100% of the container height */
+  width: auto; /* Allow the width to adjust proportionally */
+  height: auto; /* Allow the height to adjust proportionally */
+}
+
+
+.text-container-log1 {
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+
+.text-container-log2 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+
+.text-container-log3 {
+  margin-top: 45px;
+}
+.text-container-log4 {
+  margin-top: 40px;
 }

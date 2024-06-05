@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Website</title>
+<!-- Using a Content Delivery Network to install jquery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,8 +30,108 @@
   <div class="container">
     <div class="content-area">
     <!-- Display submitted soup form data here -->
-      <h2>Submitted Soup Form Data</h2>
       <ul id="submittedSoupData"></ul>
+
+      <div class="parent-container-log">
+        <div class="empty-space"></div>
+          <h1 id="heading-log">LOGBOOK</h1>
+          <div class="empty-space"></div>
+          <!-- Mountain Lodge Section -->
+              <div class="log-container">
+                <div class="log-container">
+                  <!-- <img src="site-images/Mountain Lodge.png" alt="Image of a Mountain Lodge in Banff" id="accom-img1"> -->
+                </div>
+
+
+                <div class="log-section">
+                  <div class="text-container-log1">
+                  <h4>MOUNTAINEER LODGE ★★★</h4>
+                  </div>
+                  <h6>Lake Louise</h6>
+                  <p>100m from town centre</p>
+                  <div class="text-container-log2">
+                  <h6>Set in Banff National Park and the village of Lake Louise,
+                      this hotel features an indoor hot tub. Free Wi-Fi and satellite
+                      TV are provided in all rooms.</h6>
+                  <p>See on map</pp>
+                  </div>
+                  <!-- <img src="site-images/Map1.png" alt="Map of Lake Louise" id="map1"> -->
+                  </div>
+               
+
+
+                <div class="log-section">
+                  <div class="text-container-log3">
+                  <h5>Property Highlights</h5>
+                  <h6>Top location: Highly rated by recent guests (9.0)</h6>
+                  </div>
+                  <div class="text-container-log4">
+                  <h5>Most Popular Facilities</h5>
+                  <h6>
+                      <li>24-hour Front Desk</li>
+                      <li>Free Parking</li>
+                      <li>Breakfast Included</li>
+                      <li>Laundry</li>
+                      <li>Lockers</li>
+                      <li>Air Conditioning</li>
+                      <li>Skiing</li>
+                      <li>Hiking</li>
+                      <li>Facilities for Disabled Guests</li>
+                      <li>Designated Smoking Areas</li>
+                  </h6>
+                  </div>
+                </div>
+              </div>
+              <!-- End of Mountain Lodge Section -->
+
+
+              <div class="empty-space"></div>
+
+
+              <!-- Hi Lodge Section -->
+              <div class="log-container">
+                  <div class="log-section">
+                    <!-- <img src="site-images/Alpine Centre.png" alt="Image of a hostel in Banff" id="accom-img2"> -->
+                  </div>
+
+                  <div class="log-section">
+                    <div class="text-container-log1">
+                    <h4>HI LAKE LOUISE ALPINE CENTRE ★★</h4>
+                    </div>
+                    <h6>Lake Louise</h6>
+                    <p>500m from town centre</p>
+                    <div class="text-container-log2">
+                    <h6>Set amid the Canadian Rockies in Banff National Park, this hostel boasts an on-site
+                      cafe and 2 self-catering guest kitchens. It includes private storage for guests and
+                      acts as a ski pass vendor.</h6>
+                    <p>See on map</p>
+                    </div>
+                    </div>
+                 
+
+                  <div class="log-section">
+                    <div class="text-container-log3">
+                    <h5>Property Highlights</h5>
+                    <h6>Top location: Highly rated by recent guests (9.1)</h6>
+                    </div>
+                    <div class="text-container-log4">
+                    <h5>Most Popular Facilities</h5>
+                    <h6>
+                        <li>Laundry</li>
+                        <li>Lockers</li>
+                        <li>Air Conditioning</li>
+                        <li>Skiing</li>
+                        <li>Hiking</li>
+                        <li>BBQ Facilities</li>
+                        <li>Non-smoking Rooms</li>
+                        <li>Sauna</li>
+                        <li>Outdoor Fire Place</li>
+                    </h6>
+                    </div>
+                  </div>
+                </div>
+                <!-- End of Hi Lodge Section -->
+            </div>
 
     </div>
   </div>
@@ -99,6 +201,18 @@
 
     // Call the loadRecentItemsNav function on page load
     window.addEventListener("load", loadRecentItemsNav);
+
+    $(document).ready(function() {
+  // Parse the form data from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const formData = JSON.parse(urlParams.get('formData'));
+
+  // Display the form data
+  for (const key in formData) {
+    const value = formData[key];
+    $('#dataDisplay').append(`<p>${key}: ${value}</p>`);
+  }
+    });
 
   </script>
 </body>

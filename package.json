@@ -23,6 +23,7 @@
   "homepage": "https://github.com/hamsall/abcd1234-tracker#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "jquery": "^3.7.1",
     "sass": "^1.75.0"
   },
   "devDependencies": {

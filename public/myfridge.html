@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Website</title>
+<!-- Using a Content Delivery Network to install jquery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,12 +30,13 @@
   <div class="container">
     <div class="content-area">
       <div class="fridge-headings">
-       <h2>Vegetables/Fruits</h2>
-       <h2>Legumes</h2>
-       <h2>Stocks/Spices</h2>
-       <h2>Proteins</h2>
-       <h2>Staple Carbs</h2>
+       <h2 id="VegetableFruit">Vegetable/Fruit</h2>
+       <h2 id="Legume">Legume</h2>
+       <h2 id="StockSpice">Stock/Spice</h2>
+       <h2 id="Protein">Protein</h2>
+       <h2 id="StapleCarb">Staple-Carb</h2>
      </div>
+     <!-- <div id="dataDisplay"></div> -->
     </div>
   </div>
   <script src="script.js"></script>
@@ -76,6 +79,16 @@
 
     // Call the loadRecentItemsNav function on page load
     window.addEventListener("load", loadRecentItemsNav);
+
+    $(document).ready(function() {
+  // Parse the form data from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const formData = JSON.parse(decodeURIComponent(urlParams.get('fridgeData')));
+
+    // Log the form data to the console
+    console.log(formData);
+
+});
   </script>
 </body>
 </html>

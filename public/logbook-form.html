@@ -173,6 +173,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Website</title>
+<!-- Using a Content Delivery Network to install jquery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -255,11 +257,11 @@
           <label for="foodGroup">Food Group:</label>
           <select id="foodGroup" name="foodGroup" required>
             <option value="">Select Food Group</option>
-            <option value="">Vegetable/Fruit</option>
-            <option value="">Legume</option>
-            <option value="">Stock/Spice</option>
-            <option value="">Protein</option>
-            <option value="">Staple Carb</option>
+            <option value="VegetableFruit">Vegetable/Fruit</option>
+            <option value="Legume">Legume</option>
+            <option value="StockSpice">Stock/Spice</option>
+            <option value="Protein">Protein</option>
+            <option value="StapleCarb">Staple-Carb</option>
           </select>
           <br>
           <label for="quantity">Quantity:</label>
@@ -270,21 +272,6 @@
           <br>
           <label for="calories">Calories:</label>
           <input type="text" id="calories" name="calories" required>
-          <br>
-          <label for="protein">Protein:</label>
-          <input type="text" id="protein" name="protein" required>
-          <br>
-          <label for="fat">Fat:</label>
-          <input type="text" id="fat" name="fat" required>
-          <br>
-          <label for="carbohydrates">Carbohydrates:</label>
-          <input type="text" id="carbohydrates" name="carbohydrates" required>
-          <br>
-          <label for="fibre">Fibre:</label>
-          <input type="text" id="fibre" name="fibre" required>
-          <br>
-          <label for="sugar">Sugar:</label>
-          <input type="text" id="sugar" name="sugar" required>
           <br>
           <button type="submit">Add to Fridge</button>
         </form>
