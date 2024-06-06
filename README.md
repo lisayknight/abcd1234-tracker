@@ -12,7 +12,8 @@ This project has been tested and verified to work on the following browsers:
 
 ** My Repository cloned from https://github.com/hamsall/abcd1234-tracker **
 
-https://github.com/lisayknight/abcd1234-tracker 
+Open a terminal to the directory (folder) you want to store your code repository and type the following command:
+git clone https://github.com/lisayknight/abcd1234-tracker 
 
 1. Use npm install command
 2. Use npm run dev command
@@ -23,7 +24,7 @@ https://github.com/lisayknight/abcd1234-tracker
 
 I would have loved to spend more time figuring out a more aesthetic and practical way of representing and displaying my data. I envisioned each form submission to appear as it's own container, then when you click on it, it would open up to a separate screen and go into the data in detail; including nutritional information, the entire recipe, and suggestions for the next cook.
 
-## Design Rationale
+## Web App Design
 
 ‘Simmer & Sip’ is a web app that monitors caloric intake through soups. The general purpose of ‘Simmer & Sip’ is to help young adults, especially students, effortlessly maintain a healthy diet. Users are able to log soup recipes, including ingredients and macro nutrients. The nutritional information of the soup ingredients will be manually entered by the user. This is to encourage food education and health consciousness. There is also a section of the app to track ingredients the user has on hand. This allows for efficient food preparation and planning. 
 
@@ -53,6 +54,21 @@ I have taken additional care to use vh, vw, em, rem, and % instead of px when st
 
 Initially I wanted the page to be a fixed size where no continuous scroll was necessary, however, I discovered through testing the application on my phone that it would be too difficult and tedious to ensure all my eleents stay proportionate with each other. Therefore, I made my content container scrollable. 
 
+### Features
+
+** Soup Logbook: ** The application displays soups the user has prepared and consumed over the week. It included name, cuisine, ingredients, prep time, calories, date submitted, and a GUID.
+
+** My fridge Section:** The application can be used to store the ingredients the user has on hand, creating a useful and effective tool for meal preparation. 
+
+** Calorie Count: ** The application tracks the total number of calories consumed via soups throughout the week.
+
+** Recently added section: ** A recently added tab is intergrated into the navigation bar and displays all recent data inputs. It is capped to the latest 10. 
+
+### Limitations
+
+This web app uses localStorage for data persistence, therefore, if you run the application in a different browser or different device, you will not see your logged data. This is due to localStorgae being limited to the specific browser or device.
+
+
 ### Iterations and Improvements
 
 I have modified some of the web app layout compared to my intial wireframe proposals. Instead of having separate containers for all of the data inputs, I decided to go with one big container. This allows for simplicity and a more clean aesthetic. I spent a long time playing around with the colour palette and font sizes, as well as the larger container sizes and their ratios. The goal was to have a simple yet bold design that translated well between desktop and mobile use. This is due to my target audience being young adults who have busy schedules and are drawn to convenient user experiences. 
@@ -60,6 +76,8 @@ I have modified some of the web app layout compared to my intial wireframe propo
 Initially, I used a bold and playful typography family. However, when I added more content and tested my data inputs, it looked unprofessional and messy. Therefore, I decided to stick with the classic san serif font. It is legible across various sized screens which improves accessibility and enhances the user's interactive experience. 
 
 My intial colour scheme was a black background with light grey rounded rectangle containers within dark grey rounded rectangle containers and white text. Although the colour palette looked sophisticated, I found that the colours lacked personality and didn't properly define the brand identity of the web app. I then went with a green monochrome colour palette to subliminally convey healthy eating and fresh cooking. I kept the white text for headings but where text was on top of a paler/lighter colour I improved contrast by incorporating dark green text.
+
+In my intial wireframes, I had the plus button display an option menu upon hovering where the use could decide which form to access based on what data they wanted to log. I decided to scrap that and include a drop down menu inside the form screen where the relevant form would appear based on what the user wanted to input. This allows for more straight-forward navigation and less touchpoints required. 
 
 ## Web App Functionality
 
