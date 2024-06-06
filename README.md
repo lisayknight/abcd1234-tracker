@@ -8,6 +8,10 @@ This project has been tested and verified to work on the following browsers:
 - Microsoft Edge
 - Safari
 
+## Version Control
+
+This project uses github for tracking changes and managing development. Please refer to the deployment procedures below to see the github repository. 
+
 ## Deployment Procedures
 
 ** My Repository cloned from https://github.com/hamsall/abcd1234-tracker **
@@ -27,10 +31,6 @@ I would have loved to spend more time figuring out a more aesthetic and practica
 ## Web App Design
 
 ‘Simmer & Sip’ is a web app that monitors caloric intake through soups. The general purpose of ‘Simmer & Sip’ is to help young adults, especially students, effortlessly maintain a healthy diet. Users are able to log soup recipes, including ingredients and macro nutrients. The nutritional information of the soup ingredients will be manually entered by the user. This is to encourage food education and health consciousness. There is also a section of the app to track ingredients the user has on hand. This allows for efficient food preparation and planning. 
-
-### Design Pattern - Navigation Tab
-
-Navigation tabs provide a clear indication of what content is available on a website and where to find it. I decided to use a vertical navigation bar on the left to house the different page tabs. I was inspired by the spotify web app where the user's playlists are listed in the side naigation bar. I decided to mimic this but with the display of recent data inputs. Additionally, the selected tab is boldened to indicate the user’s location relative to the microsite. (McKeown, R., Holmes, S., Salt, J. 2009.) 
 
 ### Media Enquiries + Responsiveness
 
@@ -54,15 +54,25 @@ I have taken additional care to use vh, vw, em, rem, and % instead of px when st
 
 Initially I wanted the page to be a fixed size where no continuous scroll was necessary, however, I discovered through testing the application on my phone that it would be too difficult and tedious to ensure all my eleents stay proportionate with each other. Therefore, I made my content container scrollable. 
 
-### Features
+### Sections
+
+** Dashboard: ** This is the application's home screen where users can see an overview of their weekly data.
 
 ** Soup Logbook: ** The application displays soups the user has prepared and consumed over the week. It included name, cuisine, ingredients, prep time, calories, date submitted, and a GUID.
 
 ** My fridge Section:** The application can be used to store the ingredients the user has on hand, creating a useful and effective tool for meal preparation. 
 
-** Calorie Count: ** The application tracks the total number of calories consumed via soups throughout the week.
-
 ** Recently added section: ** A recently added tab is intergrated into the navigation bar and displays all recent data inputs. It is capped to the latest 10. 
+
+### Usage
+
+1. See Dashboard for weekly data summary.
+2. Navigate to Logbook page via the tab in the left navigation bar to see all soups logged.
+3. Navigate to the My Fridge page via the tab in the left navigation bar to see all ingredients on hand
+4. Click on the plus button next to the Library heading in the navigation bar to input data.
+5. From the drop down menu, choose what task type you want to complete.
+6. Fill out the relevant form and watch as the data displays under the Recently added heading in the navigation bar as well as in the relevant pages.
+7. Delete the inputs you no longer want.
 
 ### Limitations
 
@@ -78,6 +88,10 @@ Initially, I used a bold and playful typography family. However, when I added mo
 My intial colour scheme was a black background with light grey rounded rectangle containers within dark grey rounded rectangle containers and white text. Although the colour palette looked sophisticated, I found that the colours lacked personality and didn't properly define the brand identity of the web app. I then went with a green monochrome colour palette to subliminally convey healthy eating and fresh cooking. I kept the white text for headings but where text was on top of a paler/lighter colour I improved contrast by incorporating dark green text.
 
 In my intial wireframes, I had the plus button display an option menu upon hovering where the use could decide which form to access based on what data they wanted to log. I decided to scrap that and include a drop down menu inside the form screen where the relevant form would appear based on what the user wanted to input. This allows for more straight-forward navigation and less touchpoints required. 
+
+### Design Pattern - Navigation Tab
+
+Navigation tabs provide a clear indication of what content is available on a website and where to find it. I decided to use a vertical navigation bar on the left to house the different page tabs. I was inspired by the spotify web app where the user's playlists are listed in the side naigation bar. I decided to mimic this but with the display of recent data inputs. Additionally, the selected tab is boldened to indicate the user’s location relative to the microsite. (McKeown, R., Holmes, S., Salt, J. 2009.) 
 
 ## Web App Functionality
 
